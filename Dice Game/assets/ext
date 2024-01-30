@@ -1,0 +1,88 @@
+// Player 1
+var randomNumber1 = Math.floor(Math.random() * 6) + 1; //1-6
+var randomDiceImage1 = "dice" + randomNumber1 + ".png"; //dice1.png - dice6.png
+var randomImageSource1 = "./assets/images/" + randomDiceImage1; //images/dice1.png - images/dice6.png
+document.querySelectorAll("img")[0].setAttribute("src", randomImageSource1);
+
+// Player 2
+var randomNumber2 = Math.floor(Math.random() * 6) + 1;
+var randomDiceImage2 = "dice" + randomNumber2 + ".png";
+var randomImageSource2 = "./assets/images/" + randomDiceImage2;
+document.querySelectorAll("img")[1].setAttribute("src", randomImageSource2);
+
+// Player 3
+var randomNumber3 = Math.floor(Math.random() * 6) + 1;
+var randomDiceImage3 = "dice" + randomNumber3 + ".png";
+var randomImageSource3 = "./assets/images/" + randomDiceImage3;
+document.querySelectorAll("img")[2].setAttribute("src", randomImageSource3);
+
+// Player 4
+var randomNumber4 = Math.floor(Math.random() * 6) + 1;
+var randomDiceImage4 = "dice" + randomNumber4 + ".png";
+var randomImageSource4 = "./assets/images/" + randomDiceImage4;
+document.querySelectorAll("img")[3].setAttribute("src", randomImageSource4);
+
+// Determine the winner
+// if (randomNumber1 > randomNumber2 && randomNumber1 > randomNumber3 && randomNumber1 > randomNumber4) {
+//   document.querySelector("h1").innerHTML = "🚩 Player 1 Wins!";
+// } else if (randomNumber2 > randomNumber1 && randomNumber2 > randomNumber3 && randomNumber2 > randomNumber4) {
+//   document.querySelector("h1").innerHTML = "Player 2 Wins! 🚩";
+// } else if (randomNumber3 > randomNumber1 && randomNumber3 > randomNumber2 && randomNumber3 > randomNumber4) {
+//   document.querySelector("h1").innerHTML = "Player 3 Wins! 🚩";
+// } else if (randomNumber4 > randomNumber1 && randomNumber4 > randomNumber2 && randomNumber4 > randomNumber3) {
+//   document.querySelector("h1").innerHTML = "Player 4 Wins! 🚩";
+// }else if (randomNumber1 === randomNumber2 && randomNumber1 === randomNumber3 && randomNumber1 === randomNumber4 ) {
+//   document.querySelector("h1").innerHTML = "Play Again";
+// }else if (randomNumber1 === randomNumber2 && randomNumber3 === randomNumber4) {
+//   document.querySelector("h1").innerHTML = "🚩 It's a draw between Player 1 and Player 2 & draw between player 3 and player 4!";
+// }else if (randomNumber1 === randomNumber3 && randomNumber2 === randomNumber4) {
+//   document.querySelector("h1").innerHTML = "🚩 It's a draw between Player 1 and Player 3 & draw between player 2 and player 4!";
+// }else if (randomNumber1 === randomNumber4 && randomNumber2 === randomNumber3) {
+//   document.querySelector("h1").innerHTML = "🚩 It's a draw between Player 1 and Player 4 & draw between player 2 and player 3!";
+// } else if (randomNumber1 === randomNumber2) {
+//   document.querySelector("h1").innerHTML = "🚩 It's a draw between Player 1 and Player 2!";
+// } else if (randomNumber1 === randomNumber3) {
+//   document.querySelector("h1").innerHTML = "🚩 It's a draw between Player 1 and Player 3!";
+// }else if (randomNumber1 === randomNumber4) {
+//   document.querySelector("h1").innerHTML = "🚩 It's a draw between Player 1 and Player 4!";
+// } else if (randomNumber2 === randomNumber3) {
+//   document.querySelector("h1").innerHTML = "🚩 It's a draw between Player 2 and Player 3!";
+// } else if (randomNumber2 === randomNumber4) {
+//   document.querySelector("h1").innerHTML = "🚩 It's a draw between Player 2 and Player 4!";
+// } else if (randomNumber3 === randomNumber4) {
+//   document.querySelector("h1").innerHTML = "🚩 It's a draw between Player 3 and Player 4!";
+// }else {
+//   document.querySelector("h1").innerHTML = "Draw!";
+// }
+var winners = [];
+
+switch (true) {
+  case (randomNumber1 >= randomNumber2 && randomNumber1 >= randomNumber3 && randomNumber1 >= randomNumber4):
+    winners.push("Player 1");
+    break;
+  case (randomNumber2 >= randomNumber1 && randomNumber2 >= randomNumber3 && randomNumber2 >= randomNumber4):
+    winners.push("Player 2");
+    break;
+  case (randomNumber3 >= randomNumber1 && randomNumber3 >= randomNumber2 && randomNumber3 >= randomNumber4):
+    winners.push("Player 3");
+    break;
+  case (randomNumber4 >= randomNumber1 && randomNumber4 >= randomNumber2 && randomNumber4 >= randomNumber3):
+    winners.push("Player 4");
+    break;
+}
+
+// Display the winners
+switch (winners.length) {
+  case 1:
+    document.querySelector("h1").innerHTML = "🚩 " + winners[0] + " Wins!";
+    break;
+  case 2:
+    document.querySelector("h1").innerHTML = "🚩 It's a draw between " + winners[0] + " and " + winners[1] + "!";
+    break;
+  case 3:
+    document.querySelector("h1").innerHTML = "🚩 It's a draw between " + winners[0] + ", " + winners[1] + ", and " + winners[2] + "!";
+    break;
+  default:
+    document.querySelector("h1").innerHTML = "It's a four-way draw!";
+    break;
+}

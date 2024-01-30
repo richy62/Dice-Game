@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dice Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #dice-container {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .player {
+      text-align: center;
+    }
+
+    #result {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="dice-container">
+  <div class="player">
+    <h2>Player 1</h2>
+    <p id="player1-score">0</p>
+  </div>
+  <div class="player">
+    <h2>Player 2</h2>
+    <p id="player2-score">0</p>
+  </div>
+  <div class="player">
+    <h2>Player 3</h2>
+    <p id="player3-score">0</p>
+  </div>
+</div>
+
+<div id="result"></div>
+
+<script>
+  const playerScores = [0, 0, 0];
+  const playerElements = [
+    document.getElementById('player1-score'),
+    document.getElementById('player2-score'),
+    document.getElementById('player3-score')
+  ];
+  const resultElement = document.getElementById('result');
+
+  function rollDice() {
+    return Math.floor(Math.random() * 6) + 1;
+  }
+
+  function playRound() {
+    for (let i = 0; i < 3; i++) {
+      const roll = rollDice();
+      playerScores[i] += roll;
+      playerElements[i].innerText = playerScores[i];
+    }
+
+    const maxScore = Math.max(...playerScores);
+    const winners = playerScores.reduce((acc, score, index) => {
+      if (score === maxScore) {
+        acc.push(index + 1);
+      }
+      return acc;
+    }, []);
+
+    if (winners.length === 3) {
+      resultElement.innerText = "It's a draw!";
+    } else {
+      resultElement.innerText = `Player${winners.length > 1 ? 's' : ''} ${winners.join(', ')} win${winners.length > 1 ? '' : 's'} with a score of ${maxScore}!`;
+    }
+  }
+
+  // You can call playRound() function whenever you want to play a round.
+  // For example, you can add a button and call playRound() when the button is clicked.
+
+  // Example:
+  // const playButton = document.createElement('button');
+  // playButton.innerText = 'Play Round';
+  // playButton.addEventListener('click', playRound);
+  // document.body.appendChild(playButton);
+
+  // For simplicity, let's play a round immediately when the page loads.
+  playRound();
+</script>
+
+</body>
+</html>

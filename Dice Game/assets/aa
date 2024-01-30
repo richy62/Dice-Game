@@ -1,0 +1,31 @@
+// Number of players
+var numPlayers = 4;
+
+// Array to store the random numbers and image sources for each player
+var randomNumbers = [];
+var randomImageSources = [];
+
+// Roll dice and display images for each player
+for (var i = 0; i < numPlayers; i++) {
+  randomNumbers[i] = Math.floor(Math.random() * 6) + 1;
+  randomImageSources[i] = "./assets/images/dice" + randomNumbers[i] + ".png";
+  document.querySelectorAll("img")[i].setAttribute("src", randomImageSources[i]);
+}
+
+// Determine the winner
+var winnerIndex = randomNumbers.indexOf(Math.max(...randomNumbers));
+
+if (randomNumbers.filter(num => num === randomNumbers[winnerIndex]).length === 1) {
+  // Only one player has the highest score
+  document.querySelector("h1").innerHTML = "🚩 Player " + (winnerIndex + 1) + " Wins!";
+} else {
+  // Multiple players have the highest score, check for draws
+  var drawMessage = "Draw between ";
+  for (var i = 0; i < numPlayers; i++) {
+    if (i !== winnerIndex && randomNumbers[i] === randomNumbers[winnerIndex]) {
+      drawMessage += "Player " + (i + 1) + " and ";
+    }
+  }
+  drawMessage = drawMessage.slice(0, -5); // Remove the trailing " and "
+  document.querySelector("h1").innerHTML = drawMessage;
+}
